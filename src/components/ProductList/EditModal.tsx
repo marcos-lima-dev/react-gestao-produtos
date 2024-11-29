@@ -1,6 +1,6 @@
 // src/components/ProductList/EditModal.tsx
 import { useForm, useFieldArray } from 'react-hook-form';
-import { Product } from '../../types/product';
+import { Product } from '../../types';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 

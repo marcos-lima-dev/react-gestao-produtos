@@ -1,6 +1,6 @@
 // src/store/selectors.ts
 import { RootState } from './store';
-import { Product } from '../types/product';
+import { Product } from '../types';
 
 interface FilterParams {
   name?: string;

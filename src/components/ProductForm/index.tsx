@@ -2,7 +2,7 @@
 import { useForm, useFieldArray } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { addProduct } from '../../store/productsSlice';
-import { Product } from '../../types/product';
+import { Product } from '../../types';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import toast from 'react-hot-toast';
@@ -41,14 +41,14 @@ export default function ProductForm() {
   });
 
   const productName = watch('name');
-  const variations = watch('variations');
-  const isFormValid = productName && variations.every(v => v.color && v.stockQuantity > 0 && v.price > 0);
+  const variations = watch('variations') || [];
+  const isFormValid = productName && variations?.length > 0 && variations.every(v => v.color && v.stockQuantity > 0 && v.price > 0);
 
   const onSubmit = (data: FormData) => {
     const newProduct: Product = {
       id: crypto.randomUUID(),
       name: data.name,
-      variations: data.variations.map(variation => ({
+      variations: (data.variations || []).map(variation => ({
         id: crypto.randomUUID(),
         color: variation.color,
         stockQuantity: Number(variation.stockQuantity),

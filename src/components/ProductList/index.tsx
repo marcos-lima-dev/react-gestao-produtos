@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store/store';
 import { selectFilteredProducts } from '../../store/selectors';
-import { ProductVariation, Product } from '../../types/product';
+import { ProductVariation, Product } from '../../types';
 import { removeProduct, updateProduct } from '../../store/productsSlice';
 import EditModal from './EditModal';
 import toast from 'react-hot-toast';
@@ -81,14 +81,14 @@ export default function ProductList() {
     }
     
     if (filters.sortBy === 'price') {
-      const aPrice = Math.min(...a.variations.map(v => v.price));
-      const bPrice = Math.min(...b.variations.map(v => v.price));
+      const aPrice = Math.min(...a.variations.map((v: ProductVariation) => v.price));
+      const bPrice = Math.min(...b.variations.map((v: ProductVariation) => v.price));
       return filters.sortOrder === 'asc' ? aPrice - bPrice : bPrice - aPrice;
     }
     
     if (filters.sortBy === 'stock') {
-      const aStock = Math.min(...a.variations.map(v => v.stockQuantity));
-      const bStock = Math.min(...b.variations.map(v => v.stockQuantity));
+      const aStock = Math.min(...a.variations.map((v: ProductVariation) => v.stockQuantity));
+      const bStock = Math.min(...b.variations.map((v: ProductVariation) => v.stockQuantity));
       return filters.sortOrder === 'asc' ? aStock - bStock : bStock - aStock;
     }
     
